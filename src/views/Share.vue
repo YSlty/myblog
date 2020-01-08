@@ -1,16 +1,16 @@
 <template>
-  <div class="about">
+  <div class="share">
 	<div class="index-list">
 			<div>
 				<h3>最新发布</h3>
 				<div>
 					<p><a href="/#/">首页</a></p>
-					<p><a href="/#/share">心情分享</a></p>
+					<p><a href="/#/study">学习历程</a></p>
 				</div>
 				
 			</div>
 			<ul class="list-cont">
-				<li v-for="(item,index) in about" v-bind:key="index" @click="enterDetails(item.id)">
+				<li v-for="(item,index) in share" v-bind:key="index" @click="enterDetails(item.id)">
 					<p class="list-img"><img src="" alt="" title=""></p>
 					<div class="cont">
 						<h3>{{item.title}}</h3>
@@ -87,16 +87,19 @@ export default {
     datas() {
       return this.$store.state.data
     },
-	about() {
-		let aboutMsg=this.$store.state.data,about=[];
-		if (aboutMsg.status==200) {
-		for (let i = 0; i < aboutMsg.data.length; i++) {
-			if (aboutMsg.data[i].typeId=="0") {
-				about.push(aboutMsg.data[i])
+	share() {
+		let shareMsg=this.$store.state.data,share=[];
+		window.console.log(shareMsg)
+		if (shareMsg.status==200) {
+		for (let i = 0; i < shareMsg.data.length; i++) {
+			if (shareMsg.data[i].typeId=="2") {
+				share.push(shareMsg.data[i])
 			}	
 		}			
 		}
-		return about
+
+		window.console.log(share)
+		return share
 	}
   },
   methods: {
@@ -118,7 +121,7 @@ export default {
 .text-color{
 	color: #42B983;
 }
-.about{
+.share{
 	width: 1200px;
 	margin: 0 auto;
 	display: flex;
@@ -129,6 +132,7 @@ export default {
 	width: 750px;
 }
 .index-list>div{
+	// border-bottom: 2px solid #42B983;
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
@@ -143,7 +147,9 @@ export default {
 }
 .list-cont{
 	width: 100%;
-	
+	li:hover{
+		background-color: #E7E5E5;
+	}
 	li{
 		width: 100%;
 		height: 180px;
@@ -184,9 +190,6 @@ export default {
 			-webkit-line-clamp: 3;
 			-webkit-box-orient: vertical;
 		}
-	}
-	li:hover{
-		background-color: #e7e5e5;
 	}
 }
 .sidebar{

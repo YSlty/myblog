@@ -1,37 +1,43 @@
 <template>
-  <div id="app">
+	<div>
 		<div class="header">
 			<p>Y&S.blog</p>
 		</div>
-    <div id="nav">
+		<div id="nav">
 			<div>
 				<router-link to="/">首页</router-link> 
 				<router-link to="/study">学习历程</router-link> 
 				<router-link to="/share">心情分享</router-link>
 				<router-link to="/about">关于我</router-link>
 			</div>
-    </div>
-    <router-view/>
+		</div>
+		<router-view/>
 		<footer>
 			<a href="http://www.beian.miit.gov.cn/" target="_blank">浙ICP备19052252号</a>
 		</footer>
-  </div>
+	</div>
 </template>
+
 <script>
-  export default{
-	created(){
-		this.$store.dispatch('getArticle')
+	// import 
+	export default {
+		name: 'Index',
+		data () {
+			return {
+				msg: 'dadsa'
+			}
+		}
 	}
-  }
 </script>
-<style lang="less">
+
+<style scoped lang="less">
 #app {
   // width: 1200px;
   margin: 0 auto;
 }
 .header{
 	height: 170px;
-	background-image: url(../public/img/xingkong.jpg);
+	background-image: url(../../../public/img/xingkong.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	p{
@@ -65,4 +71,5 @@ footer{
 	text-align: center;
 	border-top: 1px solid #F77825;
 }
+	
 </style>

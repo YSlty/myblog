@@ -1,22 +1,34 @@
 <template>
-  <div class="about">
-	<div class="index-list">
+  <div class="hello">
+		
+		<div class="index-list">
 			<div>
 				<h3>最新发布</h3>
 				<div>
-					<p><a href="/#/">首页</a></p>
+					<p><a href="/#/study">学习历程</a></p>
 					<p><a href="/#/share">心情分享</a></p>
 				</div>
 				
 			</div>
 			<ul class="list-cont">
-				<li v-for="(item,index) in about" v-bind:key="index" @click="enterDetails(item.id)">
+				<li>
 					<p class="list-img"><img src="" alt="" title=""></p>
 					<div class="cont">
-						<h3>{{item.title}}</h3>
-						<p v-html="item.jianjie"></p>
+						<h3>hdskjada</h3>
+						<p>下雪了，下雪了，我们大北京下雪了。一大早爸爸就带着一大一小两个宝宝出去踩雪，豌豆豆第一次看见雪，挥着手大声喊着哇哦。穿着那双蓝色的鞋子，一深一浅的往雪堆里踩，整个鞋面都是雪白一片，他弯腰去捡雪玩，冰冰的凉凉的握在手心...</p>
 						<div>
-							<p><span>心情分享</span><span>{{item.time}}</span></p>
+							<p><span>类型</span><span>时间</span></p>
+							<!-- <p><span>点赞</span><span>浏览量</span></p> -->
+						</div>
+					</div>
+				</li>
+				<li>
+					<p class="list-img"><img src="" alt="" title=""></p>
+					<div class="cont">
+						<h3>hdskjada</h3>
+						<p>下雪了，下雪了，我们大北京下雪了。一大早爸爸就带着一大一小两个宝宝出去踩雪，豌豆豆第一次看见雪，挥着手大声喊着哇哦。穿着那双蓝色的鞋子，一深一浅的往雪堆里踩，整个鞋面都是雪白一片，他弯腰去捡雪玩，冰冰的凉凉的握在手心...</p>
+						<div>
+							<p><span>类型</span><span>时间</span></p>
 							<!-- <p><span>点赞</span><span>浏览量</span></p> -->
 						</div>
 					</div>
@@ -27,20 +39,26 @@
 			<div class="tag">
 				<p class="text-color">标签</p>
 				<ul>
-					<li><router-link to="/study">学习历程</router-link> </li>
-					<li><router-link to="/share">心情分享</router-link></li>
-					<li><router-link to="/about">关于我</router-link></li>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
 				</ul>
 			</div>
 			<div class="news mt30">
 				<p class="text-color">最新文章</p>
 				<ul>
-					<li v-for="(item,index) in datas.data" v-bind:key="index" @click="enterDetails(item.id)">{{item.title}}</li>
+					<li>12346</li>
+					<li>12346</li>
+					<li>12346</li>
+					<li>12346</li>
 				</ul>
 			</div>
 			<div class="links mt30">
 				<p class="text-color">友情链接</p>
 				<ul>
+					<li><a href="http://www.zcx1.com/#">星仔个人笔记</a></li>
+					<li><a href="http://www.zcx1.com/#">星仔个人笔记</a></li>
 					<li><a href="http://www.zcx1.com/#">星仔个人笔记</a></li>
 				</ul>
 			</div>
@@ -77,34 +95,10 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Index',
   data () {
     return {
       msg: 'dadsa'
-    }
-  },
-  computed: {
-    datas() {
-      return this.$store.state.data
-    },
-	about() {
-		let aboutMsg=this.$store.state.data,about=[];
-		if (aboutMsg.status==200) {
-		for (let i = 0; i < aboutMsg.data.length; i++) {
-			if (aboutMsg.data[i].typeId=="0") {
-				about.push(aboutMsg.data[i])
-			}	
-		}			
-		}
-		return about
-	}
-  },
-  methods: {
-    enterDetails(article) {
-      this.$router.push({
-        name:"detail",
-        query:{id:article},
-      })
     }
   }
 }
@@ -118,17 +112,15 @@ export default {
 .text-color{
 	color: #42B983;
 }
-.about{
-	width: 1200px;
-	margin: 0 auto;
+.hello{
 	display: flex;
 	justify-content: space-between;
-	padding-bottom: 10px;
 }
 .index-list{
 	width: 750px;
 }
 .index-list>div{
+	// border-bottom: 2px solid #42B983;
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
@@ -150,7 +142,6 @@ export default {
 		display: flex;
 		justify-content: space-between;
 		padding: 20px 0;
-		cursor: pointer;
 		border-top: 2px solid #42B983;
 		.list-img{
 			width: 180px;
@@ -178,19 +169,13 @@ export default {
 		}
 		.cont>p{
 			line-height: 20px;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			display: -webkit-box;
-			-webkit-line-clamp: 3;
-			-webkit-box-orient: vertical;
 		}
-	}
-	li:hover{
-		background-color: #e7e5e5;
 	}
 }
 .sidebar{
 	width: 420px;
+	background-color: pink;
+	// border-left: 1px solid #F77825;
 	.tag{
 		width: 420px;
 		// float: right;
@@ -215,7 +200,6 @@ export default {
 			li{
 				margin-top: 20px;
 				margin-left: 10px;
-				cursor: pointer;
 			}
 		}
 	}

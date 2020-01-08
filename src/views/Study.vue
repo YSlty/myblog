@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="study">
 	<div class="index-list">
 			<div>
 				<h3>最新发布</h3>
@@ -10,68 +10,68 @@
 				
 			</div>
 			<ul class="list-cont">
-				<li v-for="(item,index) in about" v-bind:key="index" @click="enterDetails(item.id)">
+				<li v-for="(item,index) in study" v-bind:key="index" @click="enterDetails(item.id)">
 					<p class="list-img"><img src="" alt="" title=""></p>
 					<div class="cont">
 						<h3>{{item.title}}</h3>
 						<p v-html="item.jianjie"></p>
 						<div>
-							<p><span>心情分享</span><span>{{item.time}}</span></p>
+							<p><span>学习历程</span><span>{{item.time}}</span></p>
 							<!-- <p><span>点赞</span><span>浏览量</span></p> -->
 						</div>
 					</div>
 				</li>
 			</ul>
+	</div>
+	<div class="sidebar">
+		<div class="tag">
+			<p class="text-color">标签</p>
+			<ul>
+				<li><router-link to="/study">学习历程</router-link> </li>
+				<li><router-link to="/share">心情分享</router-link></li>
+				<li><router-link to="/about">关于我</router-link></li>
+			</ul>
 		</div>
-		<div class="sidebar">
-			<div class="tag">
-				<p class="text-color">标签</p>
-				<ul>
-					<li><router-link to="/study">学习历程</router-link> </li>
-					<li><router-link to="/share">心情分享</router-link></li>
-					<li><router-link to="/about">关于我</router-link></li>
-				</ul>
-			</div>
-			<div class="news mt30">
-				<p class="text-color">最新文章</p>
-				<ul>
-					<li v-for="(item,index) in datas.data" v-bind:key="index" @click="enterDetails(item.id)">{{item.title}}</li>
-				</ul>
-			</div>
-			<div class="links mt30">
-				<p class="text-color">友情链接</p>
-				<ul>
-					<li><a href="http://www.zcx1.com/#">星仔个人笔记</a></li>
-				</ul>
-			</div>
-			<div class="aboutmy mt30">
-				<p class="text-color">关于我</p>
-				<ul>
-					<li>
-						<div>
-							<p><img src="../../public/img/wx.png" alt=""></p>
-							<p>我的微信</p>
-						</div>
-						<p class="dp"><img src="../../public/img/code.jpg" alt=""></p>
-					</li>
-					<li>
-						<div>
-							<p><img src="../../public/img/qq2.png" alt=""></p>
-							<p>我的qq</p>
-						</div>
-						<p class="dp"><img src="../../public/img/qq.jpg" alt=""></p>
-					</li>
-					<li>
-						<div>
-							<a href="mailto:1257712175@qq.com" target="_blank" rel="external nofollow">
-								<p><img src="../../public/img/email.png" alt=""></p>
-								<p>我的邮箱</p>
-							</a>
-						</div>
-					</li>
-				</ul>
-			</div>
+		<div class="news mt30">
+			<p class="text-color">最新文章</p>
+			<ul>
+				<li v-for="(item,index) in datas.data" v-bind:key="index" @click="enterDetails(item.id)">{{item.title}}</li>
+			</ul>
 		</div>
+		<div class="links mt30">
+			<p class="text-color">友情链接</p>
+			<ul>
+				<li><a href="http://www.zcx1.com/#">星仔个人笔记</a></li>
+			</ul>
+		</div>
+		<div class="aboutmy mt30">
+			<p class="text-color">关于我</p>
+			<ul>
+				<li>
+					<div>
+						<p><img src="../../public/img/wx.png" alt=""></p>
+						<p>我的微信</p>
+					</div>
+					<p class="dp"><img src="../../public/img/code.jpg" alt=""></p>
+				</li>
+				<li>
+					<div>
+						<p><img src="../../public/img/qq2.png" alt=""></p>
+						<p>我的qq</p>
+					</div>
+					<p class="dp"><img src="../../public/img/qq.jpg" alt=""></p>
+				</li>
+				<li>
+					<div>
+						<a href="mailto:1257712175@qq.com" target="_blank" rel="external nofollow">
+							<p><img src="../../public/img/email.png" alt=""></p>
+							<p>我的邮箱</p>
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
   </div>
 </template>
 
@@ -87,16 +87,16 @@ export default {
     datas() {
       return this.$store.state.data
     },
-	about() {
-		let aboutMsg=this.$store.state.data,about=[];
-		if (aboutMsg.status==200) {
-		for (let i = 0; i < aboutMsg.data.length; i++) {
-			if (aboutMsg.data[i].typeId=="0") {
-				about.push(aboutMsg.data[i])
+	study() {
+		let studyMsg=this.$store.state.data.data,study=[];
+		window.console.log(studyMsg)
+		for (let i = 0; i < studyMsg.length; i++) {
+			if (studyMsg[i].typeId=="1") {
+				study.push(studyMsg[i])
 			}	
-		}			
 		}
-		return about
+		window.console.log(study)
+		return study
 	}
   },
   methods: {
@@ -106,7 +106,7 @@ export default {
         query:{id:article},
       })
     }
-  }
+  },
 }
 </script>
 
@@ -118,7 +118,7 @@ export default {
 .text-color{
 	color: #42B983;
 }
-.about{
+.study{
 	width: 1200px;
 	margin: 0 auto;
 	display: flex;
@@ -143,7 +143,9 @@ export default {
 }
 .list-cont{
 	width: 100%;
-	
+	li:hover{
+		background-color: #E7E5E5;
+	}
 	li{
 		width: 100%;
 		height: 180px;
@@ -184,9 +186,6 @@ export default {
 			-webkit-line-clamp: 3;
 			-webkit-box-orient: vertical;
 		}
-	}
-	li:hover{
-		background-color: #e7e5e5;
 	}
 }
 .sidebar{
