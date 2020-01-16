@@ -18,9 +18,9 @@ export default new Vuex.Store({
   },
   actions: {
 		getArticle(context){
-			Axios.get('json/blog.json')
+			Axios.get('http://backstage.yslty.com/api/article')
 			.then(function (res) {
-				context.commit('getArticle',res)
+				context.commit('getArticle',res.data)
 			})
 			.catch(function (error) {
 				window.console.log(error);
