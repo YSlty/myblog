@@ -8,12 +8,17 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 		data:[],
-		num:'1'
+		num:'1',
+		list:[]
   },
   mutations: {
 		getArticle(state,res){
 			state.data=res
-			window.console.log(res)
+			// window.console.log(res)
+		},
+		getMsg(state,res){
+			state.list=res
+			// window.console.log(res)
 		}
   },
   actions: {
@@ -21,6 +26,13 @@ export default new Vuex.Store({
 			Axios.get('http://backstage.yslty.com/api/article')
 			.then(function (res) {
 				context.commit('getArticle',res.data)
+			})
+			.catch(function (error) {
+				window.console.log(error);
+			});
+			Axios.get('http://backstage.yslty.com/api/showLeaveMsg')
+			.then(function (res) {
+				context.commit('getMsg',res.data)
 			})
 			.catch(function (error) {
 				window.console.log(error);

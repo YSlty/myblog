@@ -88,17 +88,15 @@ export default {
       return this.$store.state.data
     },
 	share() {
-		let shareMsg=this.$store.state.data,share=[];
+		let shareMsg=this.$store.state.data.data,share=[];
 		window.console.log(shareMsg)
-		if (shareMsg.status==200) {
-		for (let i = 0; i < shareMsg.data.length; i++) {
-			if (shareMsg.data[i].typeId=="2") {
-				share.push(shareMsg.data[i])
-			}	
-		}			
+		if (shareMsg!=undefined) {
+			for (let i = 0; i < shareMsg.length; i++) {
+				if (shareMsg[i].typeId=="2") {
+					share.push(shareMsg[i])
+				}	
+			}			
 		}
-
-		window.console.log(share)
 		return share
 	}
   },

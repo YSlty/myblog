@@ -4,6 +4,15 @@
 			<h3>{{getdata()}}{{msg.title}}</h3>
 			<p><span>{{msg.user}}</span><span>{{msg.type}}</span><span>{{msg.time}}</span></p>
 			<div v-html="msg.content"></div>
+			<div class="leave-msg">
+				<p class="msg-title">留言</p>
+				<textarea name="" id="" cols="" rows="" v-model="leaveMsg" style="resize: none;"></textarea>
+				<p style="height: 40px;"><button type="primary" @click="btnComment">发表留言</button></p>
+				
+				<ul>
+					<li v-for="(item,index) in msglist" :key="index"><span>{{item.cont}}</span><span>2020-03-03</span></li>
+				</ul>
+			</div>
 		</div>
 	
 	<div class="sidebar">
@@ -63,21 +72,19 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: '1'
+		msg:'',
+      leaveMsg: '',
+		list:[]
     }
   },
 	computed: {
 		datas() {
-			// window.console.log(this.$route.query.id)
 			let data=this.$store.state.data;
 			let msg;
-			window.console.log(data.data)
 			if (data.length!=0) {
 				for (let i = 0; i < data.data.length; i++) {
-					window.console.log('1')
 					if(data.data[i].id==this.$route.query.id){
 						msg=data.data[i]
-						window.console.log(this.msg)
 					}
 				}
 			}
@@ -86,19 +93,28 @@ export default {
 		},
 		newData() {
 			return this.$store.state.data
+		},
+		msglist(){
+			window.console.log(this.$store.state.list);
+			let msglist=[],msgdata;
+			if (this.$store.state.list!="") {
+				msgdata=this.$store.state.list.data;
+				for(let i=0;i<msgdata.length;i++){
+					if (msgdata[i].artId==this.$route.query.id) {
+						msglist.push(msgdata[i])
+					}
+				}
+			}
+			return msglist
 		}
 	},
 	methods: {
 		getdata() {
-			// window.console.log(this.$route.query.id)
 			let data=this.$store.state.data;
-			// let msg;
-			window.console.log(data.data)
 			if (data.length!=0) {
 				for (let i = 0; i < data.data.length; i++) {
 					if(data.data[i].id==this.$route.query.id){
 						this.msg=data.data[i]
-						window.console.log(this.msg)
 					}
 				}
 			}
@@ -108,7 +124,32 @@ export default {
 				name:"detail",
 				query:{id:article},
 			})
-		}
+		},
+		btnComment(){
+			if(this.leaveMsg!=""){
+				let postData = this.$qs.stringify({
+					cont:this.leaveMsg,
+					artId:this.$route.query.id
+				});
+				this.axios.post('http://backstage.yslty.com/api/leaveMsg',postData)
+				.then(function (response) {
+					if (response.data.code==1){
+						alert("提交成功，请等待后台人员审核")
+					}else if (response.data.code==-1) {
+						alert("提交失败,请填写您的留言内容")
+					}
+				})
+				.catch(function (error) {
+					window.console.log(error);
+					alert("提交失败")
+				});
+				this.leaveMsg='';
+			}else{
+				alert("请填写您的留言内容")
+			}
+			
+		},
+		
 	}
 }
 </script>
@@ -204,6 +245,46 @@ export default {
 		}
 		.cont>p{
 			line-height: 20px;
+		}
+	}
+}
+.leave-msg{
+	margin-top: 50px;
+	.msg-title{
+		font-size: 24px;
+		font-weight: bold;
+		color: #F77825;
+	}
+	textarea{
+		width: 750px;
+		height: 80px;
+		margin-top: 20px;
+		border: 1px solid #E7E5E5;
+		padding: 0;
+		padding-left: 8px;
+		font-size: 20px;
+	}
+	button{
+		float: right;
+		width: 120px;
+		height: 40px;
+		border: none;
+		background-color: red;
+		font-size: 20px;
+		color: #FFFFFF;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+	ul{
+		li{
+			width: 750px;
+			display: flex;
+			justify-content: space-between;
+			padding-top: 10px;
+			span:nth-of-type(1){
+				display: block;
+				width: 600px;
+			}
 		}
 	}
 }

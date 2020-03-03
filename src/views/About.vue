@@ -16,7 +16,7 @@
 						<h3>{{item.title}}</h3>
 						<p v-html="item.jianjie"></p>
 						<div>
-							<p><span>心情分享</span><span>{{item.time}}</span></p>
+							<p><span>关于我</span><span>{{item.time}}</span></p>
 							<!-- <p><span>点赞</span><span>浏览量</span></p> -->
 						</div>
 					</div>
@@ -88,13 +88,13 @@ export default {
       return this.$store.state.data
     },
 	about() {
-		let aboutMsg=this.$store.state.data,about=[];
-		if (aboutMsg.status==200) {
-		for (let i = 0; i < aboutMsg.data.length; i++) {
-			if (aboutMsg.data[i].typeId=="0") {
-				about.push(aboutMsg.data[i])
-			}	
-		}			
+		let aboutMsg=this.$store.state.data.data,about=[];
+		if (aboutMsg!=undefined) {
+			for (let i = 0; i < aboutMsg.length; i++) {
+				if (aboutMsg[i].typeId=="0") {
+					about.push(aboutMsg[i])
+				}	
+			}			
 		}
 		return about
 	}

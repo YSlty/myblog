@@ -89,13 +89,13 @@ export default {
     },
 	study() {
 		let studyMsg=this.$store.state.data.data,study=[];
-		window.console.log(studyMsg)
-		for (let i = 0; i < studyMsg.length; i++) {
-			if (studyMsg[i].typeId=="1") {
-				study.push(studyMsg[i])
-			}	
+		if (studyMsg!=undefined) {
+			for (let i = 0; i < studyMsg.length; i++) {
+				if (studyMsg[i].typeId=="1") {
+					study.push(studyMsg[i])
+				}	
+			}
 		}
-		window.console.log(study)
 		return study
 	}
   },
