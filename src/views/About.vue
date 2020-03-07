@@ -35,7 +35,7 @@
 			<div class="news mt30">
 				<p class="text-color">最新文章</p>
 				<ul>
-					<li v-for="(item,index) in datas.data" v-bind:key="index" @click="enterDetails(item.id)">{{item.title}}</li>
+					<li v-for="(item,index) in datas" v-bind:key="index" @click="enterDetails(item.id)">{{item.title}}</li>
 				</ul>
 			</div>
 			<div class="links mt30">
@@ -85,7 +85,16 @@ export default {
   },
   computed: {
     datas() {
-      return this.$store.state.data
+		let data=[],msglist=this.$store.state.data.data;
+		if (msglist!=undefined) {
+			for(let i=0;i<msglist.length;i++){
+				if (i<6) {
+					data.push(msglist[i])
+				}
+				
+			}
+		}
+      return data
     },
 	about() {
 		let aboutMsg=this.$store.state.data.data,about=[];
