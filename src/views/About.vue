@@ -83,6 +83,20 @@ export default {
       msg: 'dadsa'
     }
   },
+	metaInfo(){
+        return {
+            title: '关于我',
+            meta: [
+                {
+                    name:"keywords",
+                    content: '关于我'
+                },{
+                    name:"description",
+                    content: '关于我'
+                }
+            ]
+        }
+   },
   computed: {
     datas() {
 		let data=[],msglist=this.$store.state.data.data;

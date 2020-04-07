@@ -83,6 +83,20 @@ export default {
       msg: 'dadsa'
     }
   },
+	metaInfo(){
+				return {
+						title: '心情分享',
+						meta: [
+								{
+										name:"keywords",
+										content: '心情分享'
+								},{
+										name:"description",
+										content: '心情分享'
+								}
+						]
+				}
+	},
   computed: {
     datas() {
       return this.$store.state.data

@@ -72,11 +72,25 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-		msg:'',
+			msg:'',
       leaveMsg: '',
-		list:[]
+			list:[]
     }
   },
+	metaInfo(){
+				return {
+						title: this.msg.title,
+						meta: [
+								{
+										name:"keywords",
+										content: this.msg.jianjie
+								},{
+										name:"description",
+										content: this.msg.jianjie
+								}
+						]
+				}
+	},
 	computed: {
 		datas() {
 			let data=this.$store.state.data;
@@ -88,14 +102,13 @@ export default {
 					}
 				}
 			}
-			
+			window.console.log(msg);
 			return msg
 		},
 		newData() {
 			return this.$store.state.data
 		},
 		msglist(){
-			window.console.log(this.$store.state.list);
 			let msglist=[],msgdata;
 			if (this.$store.state.list!="") {
 				msgdata=this.$store.state.list.data;

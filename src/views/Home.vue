@@ -12,7 +12,21 @@ export default {
   name: 'home',
   components: {
     HelloWorld
-  }
+  },
+	metaInfo(){
+				return {
+						title: '夜殇的个人blog',
+						meta: [
+								{
+										name:"keywords",
+										content: '夜殇的个人blog'
+								},{
+										name:"description",
+										content: '夜殇的个人blog'
+								}
+						]
+				}
+	},
 }
 </script>
 <style scoped lang="less">

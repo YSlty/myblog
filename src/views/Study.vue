@@ -83,6 +83,20 @@ export default {
       msg: 'dadsa'
     }
   },
+	metaInfo(){
+				return {
+						title: '学习历程',
+						meta: [
+								{
+										name:"keywords",
+										content: '学习历程'
+								},{
+										name:"description",
+										content: '学习历程'
+								}
+						]
+				}
+	},
   computed: {
     datas() {
       return this.$store.state.data

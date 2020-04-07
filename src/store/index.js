@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
+import MetaInfo from 'vue-meta'
 
+Vue.use(MetaInfo)
 Vue.use(Vuex)
 // Vue.use()
 
