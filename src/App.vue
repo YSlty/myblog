@@ -19,7 +19,7 @@
 			<div>
 				<p>{{tip.data}}</p>
 				<div>
-					<button type="primary" @click="sure()">确定</button>
+					<button type="primary" @click="sure()">确br定</button>
 					<button type="primary" @click="cancelTip()">取消</button>
 				</div>
 			</div>
