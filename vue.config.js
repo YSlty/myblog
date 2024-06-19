@@ -2,7 +2,7 @@ const path = require('path');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 module.exports = {    
-	configureWebpack: () => {    
+	configureWebpack: () => { 
 		if (process.env.NODE_ENV === "production") {      
 			return {        
 				plugins: [          
@@ -23,4 +23,24 @@ module.exports = {
 				]    ,
 			};  
 		} 
-	}}
+	},
+// 	devServer:{
+// 	        open:false,      // 是否打开浏览器;
+// 	        hotOnly:true,    // 是否热更新;
+// 	// 		host:"175.6.143.11",
+// 	// 		port:'3326',
+// 	        proxy:{
+// 	            '/':{
+// 	                target:'http://192.6.143.11：3326',    // 目标代理接口地址,实际跨域要访问的接口,这个地址会替换掉 axios.defaults.baseURL
+// 	                secure:false,
+// 	                changeOrigin:true,  // 开启代理，在本地创建一个虚拟服务端
+// 	                ws:true,       // 是否启用  websockets;
+// 	                pathRewrite:{
+// 	                    '^/':''
+// 	                }
+// 	            },
+// 	        
+// 	        },
+// 	
+// 	    },
+}
